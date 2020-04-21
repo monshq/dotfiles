@@ -1,0 +1,1 @@
+/Users/monshq/.neovim_config/.vimrc
