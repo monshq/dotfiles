@@ -30,18 +30,19 @@ alias gp 'git push'
 alias gl 'git pull'
 alias gco 'git checkout'
 alias gcb 'git checkout -b'
+alias gcp 'git cherry-pick'
 
-alias fconfig 'vim ~/.config/fish/config.fish && source ~/.config/fish/config.fish'
+alias fconfig 'vim ~/.config/fish/config.fish; and source ~/.config/fish/config.fish'
 alias config 'git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 function init-config
-    git clone --bare git@github.com:monshq/dotfiles.git $HOME/.cfg && \
-    config config --local status.showUntrackedFiles no
+    git clone --bare git@github.com:monshq/dotfiles.git $HOME/.cfg;
+    and config config --local status.showUntrackedFiles no
 end
 
 function backup-config
-    mkdir -p .config-backup
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+    mkdir -p ~/.config-backup
+    config checkout 2>&1 | egrep "\s+\." | awk '{print $1}' | xargs -I{} mv {} ~/.config-backup/{}
 end
 
 set --universal fish_user_paths $fish_user_paths ~/.rbenv/shims

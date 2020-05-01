@@ -1,11 +1,11 @@
 " Install vim-plug
-if empty(glob('~/.vimm/autoload/plug.vim'))
-    silent !curl -fLo ~/.vimm/autoload/plug.vim --create-dirs
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync
 endif
 
-call plug#begin('~/.vimm/plugged')
+call plug#begin('~/.config/nvim/plugged')
   " Make sure you use single quotes
 
   Plug 'tomasr/molokai'
@@ -31,7 +31,7 @@ call plug#begin('~/.vimm/plugged')
 
   Plug 'tpope/vim-fugitive'
 
-  Plug 'neoclide/coc.nvim', {'branch': 'release'} ", 'do': { -> coc#util#install()}}
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'} ", 'do': { -> coc#util#install()}}
 
   Plug 'janko/vim-test'
 
@@ -42,6 +42,7 @@ set background=dark
 colorscheme molokai
 
 autocmd! bufwritepost .vimrc source $MYVIMRC
+autocmd! bufwritepost init.vim source $MYVIMRC
 "autocmd! bufwritepost *.rb Neomake mri
 
 " Interface
@@ -203,7 +204,7 @@ let mapleader = ' '
   nmap <leader>wj  <C-w>n
 
   " edit .vimrc
-  nmap <leader>v :tabe ~/.vimrc<CR>
+  nmap <leader>v :tabe $MYVIMRC<CR>
 
   nmap <leader>p :FZF<CR>
   nmap <leader>s :Ag<CR>
@@ -358,7 +359,7 @@ let mapleader = ' '
   endfunction
 
   " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Use tab for trigger completion with characters ahead and navigate.
   " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
