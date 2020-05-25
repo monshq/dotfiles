@@ -1,0 +1,32 @@
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  df = diff
+  rbz = rebase -i
+  zbs = rebase --continue
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  who = shortlog -s --
+  gr = log --graph --oneline
+  create-pull-request = !sh -c 'stash pull-request $0'
+  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+\\.ru\\\\/\\(.+\\)\\\\/\\(.+\\)\\.git$/https:\\\\/\\\\/stash\\\\.funbox\\\\.ru\\\\/projects\\\\/\\\\1\\\\/repos\\\\/\\\\2\\\\/browse/g"'
+  bruh =!sh -c 'git branch --set-upstream-to=origin/`git rev-parse --abbrev-ref HEAD` `git rev-parse --abbrev-ref HEAD`'
+
+[push]
+  default = current
+
+[color]
+  ui = true
+
+; [user]
+  ; email = 'e.blinov@fun-box.ru'
+  ; name = 'エゴル　ブリノヴ'
+  ; name = 'Egor Blinov'
+
+[core]
+  autocrlf = input
+
+[includeIf "gitdir:~/projects/"]
+  path = .gitconfig-funbox
+[includeIf "gitdir:~/external_projects/"]
+  path = .gitconfig-external

@@ -17,6 +17,8 @@ set EDITOR nvim
 
 alias vim 'nvim'
 
+alias be 'bundle exec'
+
 alias gaa 'git add --all'
 alias ga 'git add'
 alias gb 'git branch -vv'

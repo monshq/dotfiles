@@ -31,9 +31,12 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'tpope/vim-fugitive'
 
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'} ", 'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} ", 'do': { -> coc#util#install()}}
+  " Plug 'amiralies/coc-elixir', {'do': 'yarn install --frozen-lockfile && yarn run build'}
 
-  Plug 'janko/vim-test'
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+  Plug 'vim-test/vim-test'
 
 call plug#end()
 
@@ -48,11 +51,11 @@ autocmd! bufwritepost init.vim source $MYVIMRC
 " Interface
   " Character encoding used inside Vim
   " Only available when compiled with the +multi_byte feature
-  try
-    set encoding=utf-8
-  catch
+  " try
+  set encoding=utf-8
+  " catch
     " like we care
-  endtry
+  " endtry
   " Character encodings considered when starting to edit an existing file
   " Only available when compiled with the +multi_byte feature
   set fileencodings=utf-8,cp1251
@@ -348,7 +351,7 @@ let mapleader = ' '
   nmap <leader>lr <Plug>(coc-rename)
 
   " Use K for show documentation in preview window
-  "nnoremap <silent> Q :call <SID>show_documentation()<CR>
+  nnoremap <silent> Q :call <SID>show_documentation()<CR>
 
   function! s:show_documentation()
     if &filetype == 'vim'

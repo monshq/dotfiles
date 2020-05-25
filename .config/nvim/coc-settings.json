@@ -2,5 +2,13 @@
   "codeLens.enable": true,
   "solargraph.checkGemVersion": false,
   "solargraph.useBundler": false,
-  "solargraph.diagnostics": true
+  "solargraph.diagnostics": true,
+  "solargraph.promptDownload": false,
+  "elixirLS.dialyzerEnabled": false,
+  "languageserver": {
+    "elixirLS": {
+      "command": "~/.bin/elixir-ls/release/language_server.sh",
+      "filetypes": ["elixir", "eelixir"]
+    }
+  }
 }
