@@ -18,10 +18,10 @@
 [color]
   ui = true
 
-; [user]
-  ; email = 'e.blinov@fun-box.ru'
+[user]
+  email = 'monshq@users.noreply.github.com'
+  name = 'monshq'
   ; name = 'エゴル　ブリノヴ'
-  ; name = 'Egor Blinov'
 
 [core]
   autocrlf = input

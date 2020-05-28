@@ -225,7 +225,12 @@ let mapleader = ' '
   nmap <leader>ts :%s/\s\+$//e<CR>
 
   " open current line in stash
-  nmap <leader>os :!noglob echo `git url`/%?at=`git rev-parse HEAD`\#<C-R>=line('.')<CR> \| xargs open<CR><CR>
+  let g:os = substitute(system('uname'), '\n', '', '')
+  if g:os == "Darwin"
+    nmap <leader>os :!noglob echo `git url`/%?at=`git rev-parse HEAD`\#<C-R>=line('.')<CR> \| xargs open<CR><CR>
+  else
+    nmap <leader>os :!noglob echo `git url`/%?at=`git rev-parse HEAD`\#<C-R>=line('.')<CR> \| xargs xdg-open<CR><CR>
+  endif
 
 
 
