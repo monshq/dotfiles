@@ -60,7 +60,7 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
-export PATH="$HOME/.rbenv/shims:$PATH"
+export PATH="$HOME/.rbenv/shims:$HOME/.local/bin:$PATH"
 
 source $HOME/.asdf/asdf.sh
 # append completions to fpath

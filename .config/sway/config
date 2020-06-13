@@ -1,0 +1,59 @@
+# SwayWM global configuration. For detailed information type "man sway"
+# Author: Oscar Carballal Prego <oscar.carballal@protonmail.com>
+
+###############################################################################
+# TODO:
+#   + Sway:
+#      - Autoassign workspaces to certain applications
+#      - Unlock keychain after login
+#      -
+#   + SwayBar:
+#     - Show language layout for currently used keyboard
+###############################################################################
+
+# Main definitions
+
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+set $menu rofi -terminal alacritty -theme ~/.config/sway/rofi/flat-orange.rasi -show run
+# Default wallpape
+set $wallpaper ~/Pictures/wallhaven-zmr6qv.png
+# Default lockscreen background
+set $lockscreenbg ~/.config/sway/images/lockscreen_background.png
+
+set $audio_sink 1
+
+# Remove all borders from applications
+default_border none
+
+# Stablish gaps between windows and from the screen edge
+gaps inner 5
+gaps outer 1
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start your launcher
+bindsym $mod+x exec $menu
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+# Reload the configuration file. Be aware that some changes might need
+# a session logout (gaps, for example)
+bindsym $mod+Shift+c reload
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -b 'Yes, exit sway' 'swaymsg exit'
+
+include ~/.config/sway/config.d/*
