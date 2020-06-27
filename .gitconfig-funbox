@@ -2,3 +2,6 @@
   email = 'e.blinov@fun-box.ru'
   ;name = 'エゴル　ブリノヴ'
   name = 'e.blinov'
+
+[core]
+  hooksPath = '/Users/monshq/.githooks'

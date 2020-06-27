@@ -9,7 +9,7 @@
   who = shortlog -s --
   gr = log --graph --oneline
   create-pull-request = !sh -c 'stash pull-request $0'
-  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+\\.ru\\\\/\\(.+\\)\\\\/\\(.+\\)\\.git$/https:\\\\/\\\\/stash\\\\.funbox\\\\.ru\\\\/projects\\\\/\\\\1\\\\/repos\\\\/\\\\2\\\\/browse/g"'
+  url =! bash -c 'git config --get remote.origin.url | sed -E "s/.+\\.ru\\\\/\\(.+\\)\\\\/\\(.+\\)\\.git$/https:\\\\/\\\\/bb\\\\.funbox\\\\.ru\\\\/projects\\\\/\\\\1\\\\/repos\\\\/\\\\2\\\\/browse/g"'
   bruh =!sh -c 'git branch --set-upstream-to=origin/`git rev-parse --abbrev-ref HEAD` `git rev-parse --abbrev-ref HEAD`'
 
 [push]
@@ -30,3 +30,5 @@
   path = .gitconfig-funbox
 [includeIf "gitdir:~/external_projects/"]
   path = .gitconfig-external
+[pull]
+	rebase = true

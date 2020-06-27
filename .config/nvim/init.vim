@@ -27,21 +27,18 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'tpope/vim-rails'
 
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
 
   Plug 'tpope/vim-fugitive'
 
   Plug 'neoclide/coc.nvim', {'branch': 'release'} ", 'do': { -> coc#util#install()}}
-  " Plug 'amiralies/coc-elixir', {'do': 'yarn install --frozen-lockfile && yarn run build'}
-
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
   Plug 'vim-test/vim-test'
 
 call plug#end()
 
 set termguicolors
-set background=dark
 colorscheme molokai
 
 autocmd! bufwritepost .vimrc source $MYVIMRC
@@ -209,7 +206,7 @@ let mapleader = ' '
   " edit .vimrc
   nmap <leader>v :tabe $MYVIMRC<CR>
 
-  nmap <leader>p :FZF<CR>
+  nmap <leader>p :Files<CR>
   nmap <leader>s :Ag<CR>
   nmap <leader>f :NERDTreeFind<CR>
 
@@ -225,18 +222,18 @@ let mapleader = ' '
   nmap <leader>ts :%s/\s\+$//e<CR>
 
   " open current line in stash
-  let g:os = substitute(system('uname'), '\n', '', '')
-  if g:os == "Darwin"
+  " let os = substitute(system('uname'), '\n', '', '')
+  " if os == "Darwin"
     nmap <leader>os :!noglob echo `git url`/%?at=`git rev-parse HEAD`\#<C-R>=line('.')<CR> \| xargs open<CR><CR>
-  else
-    nmap <leader>os :!noglob echo `git url`/%?at=`git rev-parse HEAD`\#<C-R>=line('.')<CR> \| xargs xdg-open<CR><CR>
-  endif
+  " else
+    " nmap <leader>os :!noglob echo `git url`/%?at=`git rev-parse HEAD`\#<C-R>=line('.')<CR> \| xargs xdg-open<CR><CR>
+  " endif
 
 
 
 " File specific
   autocmd FileType haml setlocal expandtab
-  autocmd BufNewFile,BufRead nginx/*.conf set syntax=nginx
+  autocmd BufNewFile,BufRead nginx/*.conf setf nginx
   autocmd BufNewFile,BufRead Jenkinsfile setf groovy
   autocmd FileType fish compiler fish
 
@@ -247,7 +244,7 @@ let mapleader = ' '
   let NERDTreeShowBookmarks=1
   let NERDTreeChDirMode=2
   let NERDTreeQuitOnOpen=1
-  let NERDTreeIgnore=["\.git","\.eunit"]
+  " let NERDTreeIgnore=["\.git","\.eunit"]
   let NERDTreeShowHidden=1
   let NERDTreeKeepTreeInNewTab=0
   " Disable display of the 'Bookmarks' label and 'Press ? for help' text
@@ -282,45 +279,6 @@ let mapleader = ' '
   " let g:neomake_ruby_enabled_makers = ['mri']
   " let g:neomake_verbose = -1
   " call neomake#configure#automake('nw', 750)
-
-" FZF
-  let g:fzf_height = '30%'
-
-  function! s:ag_to_qf(line)
-    let parts = split(a:line, ':')
-    return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
-          \ 'text': join(parts[3:], ':')}
-  endfunction
-
-  function! s:ag_handler(lines)
-    if len(a:lines) < 2 | return | endif
-
-    let cmd = get({'ctrl-x': 'split',
-                 \ 'ctrl-v': 'vertical split',
-                 \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-    let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
-
-    let first = list[0]
-    execute cmd escape(first.filename, ' %#\')
-    execute first.lnum
-    execute 'normal!' first.col.'|zz'
-
-    if len(list) > 1
-      call setqflist(list)
-      copen
-      wincmd p
-    endif
-  endfunction
-
-  command! -nargs=* Ag call fzf#run({
-  \ 'source':  printf('ag --nogroup --column --color "%s"',
-  \                   escape(empty(<q-args>) ? '^(?=.)' : <q-args>, '"\')),
-  \ 'sink*':    function('<sid>ag_handler'),
-  \ 'options': '--ansi --expect=ctrl-t,ctrl-v,ctrl-x --delimiter : --nth 4.. '.
-  \            '--multi --bind ctrl-a:select-all,ctrl-d:deselect-all '.
-  \            '--color hl:68,hl+:110',
-  \ 'down':    '30%'
-  \ })
 
 " vim-test
   nmap <silent> <leader>tt :TestFile<CR>

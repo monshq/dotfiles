@@ -23,21 +23,27 @@ zinit light 'sindresorhus/pure'
 zinit light 'zsh-users/zsh-autosuggestions'
 zinit light 'zsh-users/zsh-syntax-highlighting'
 
-zinit snippet 'https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker'
+# zinit snippet 'https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker'
 
 ### End of Zinit's installer chunk
+
 
 export EDITOR=nvim
 
 export PKG_CONFIG_PATH='/usr/share/pkgconfig:/usr/lib/x86_64-linux-gnu/pkgconfig:/home/linuxbrew/.linuxbrew/lib/pkgconfig'
 
 
-alias ls='ls --color=always'
+# alias ls='ls --color=always'
+export CLICOLOR=1
 alias la='ls -Alh'
 
 alias vim='nvim'
 
 alias be='bundle exec'
+alias explico='bundle exec explico'
+alias rspec='bundle exec rspec'
+
+alias k='kubectl'
 
 alias gaa='git add --all'
 alias ga='git add'
@@ -63,11 +69,11 @@ zstyle ':completion:*:*:docker-*:*' option-stacking yes
 export PATH="$HOME/.rbenv/shims:$HOME/.local/bin:$PATH"
 
 source $HOME/.asdf/asdf.sh
-# append completions to fpath
-# fpath=(~/.asdf/completions $fpath)
-# initialise completions with ZSH's compinit
-# autoload -Uz compinit
-# compinit
+fpath=(~/.asdf/completions $fpath)
+
+autoload -Uz compinit
+compinit
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 # zprof
